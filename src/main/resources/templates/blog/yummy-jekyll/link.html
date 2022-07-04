@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="blog/yummy-jekyll/header::header('友情链接','liyeam Blog')"></div>
+<div class="content">
+    <section class="jumbotron geopattern" style="background-image: url(data:image/svg+xml;base64);">
+        <div class="container">
+            <div id="jumbotron-meta-info">
+                <h1>Links</h1>
+                <span class="meta-info">
+                        <span class="mega-octicon octicon-organization"></span>&nbsp;&nbsp; 友情链接
+                    </span>
+            </div>
+        </div>
+    </section>
+    <article class="post container">
+        <div class="row">
+            <div class="col-md-12 markdown-body">
+                <th:block th:unless="${#lists.isEmpty(favoriteLinks)}">
+                    <h2>友链</h2>
+                    <ul>
+                        <th:block th:each="favoriteLink : ${favoriteLinks}">
+                            <li><a th:href="@{${favoriteLink.linkUrl}}"
+                                   th:text="${favoriteLink.linkName}">友链</a>
+                                -
+                                <th:block th:text="${favoriteLink.linkDescription}"></th:block>
+                            </li>
+                        </th:block>
+                    </ul>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(recommendLinks)}">
+                    <h2>推荐网站</h2>
+                    <ul>
+                        <th:block th:each="recommendLink : ${recommendLinks}">
+                            <li><a th:href="@{${recommendLink.linkUrl}}" th:text="${recommendLink.linkName}">推荐网站</a>
+                                -
+                                <th:block th:text="${recommendLink.linkDescription}"></th:block>
+                            </li>
+                        </th:block>
+                    </ul>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(personalLinks)}">
+                    <h2>个人链接</h2>
+                    <ul>
+                        <th:block th:each="personalLink : ${personalLinks}">
+                            <li><a th:href="@{${personalLink.linkUrl}}"
+                                   th:text="${personalLink.linkName}">个人链接</a>
+                                -
+                                <th:block th:text="${personalLink.linkDescription}"></th:block>
+                            </li>
+                        </th:block>
+                    </ul>
+                </th:block>
+                <h2 id="个人链接">链接须知</h2>
+                <p>欢迎互换友链 ^_^ 不过请确定贵站可以正常运营.</p>
+                <p>我的邮箱是 <th:block th:text="${configurations.get('yourEmail')}"></th:block> , 格式要求如下:</p>
+                <ul>
+                    <li>网站名称：liyeam</li>
+                    <li>网站链接：http://liyeam.site</li>
+                    <li>网站描述：绵羊的个人博客</li>
+                </ul>
+
+                <p>请保证自己的链接长期有效,不然可能会被清理.</p>
+            </div>
+
+        </div>
+
+    </article>
+
+</div>
+</body>
+<div th:replace="blog/yummy-jekyll/footer::footer"></div>
+</html>
